@@ -1,0 +1,6 @@
+framework module SinaPaySDK {
+  umbrella header "SinaPaySDK.h"
+
+  export *
+  module * { export * }
+}
