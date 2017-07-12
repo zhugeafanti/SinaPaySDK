@@ -230,15 +230,15 @@ Schemes字段还是要和调起支付宝的appScheme字段相同否则支付成�
 AppDelegate.m代理类处理了各种支付方式同步回调。相关代码如下：
 
 ```
-- (BOOL)application:(UIApplication \*)application
+- (BOOL)application:(UIApplication *)application
 
-openURL:(NSURL \*)url
+openURL:(NSURL *)url
 
-sourceApplication:(NSString \*)sourceApplication
+sourceApplication:(NSString *)sourceApplication
 
 annotation:(id)annotation {
 
-return \[SinaPaySDK handleOpenURL:url\];
+return [SinaPaySDK handleOpenURL:url];
 
 }
 ```
@@ -246,12 +246,12 @@ return \[SinaPaySDK handleOpenURL:url\];
 // NOTE: 9.0以后使用新API接口
 
 ```
-- (BOOL)application:(UIApplication \*)app openURL:(NSURL \*)url
-options:(NSDictionary&lt;NSString\*, id&gt; \*)options
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url
+options:(NSDictionary<NSString*, id> *)options
 
 {
 
-return \[SinaPaySDK handleOpenURL:url\];
+return [SinaPaySDK handleOpenURL:url];
 
 }
 ```
@@ -264,29 +264,29 @@ return \[SinaPaySDK handleOpenURL:url\];
 在使用SDK时，需要进行注册，注册的代码如下：
 
 ```
-\[SinaPaySDK
-registerActivePlatforms:@\[@(SinaPaySDKPaymentTypeAlipay),@(SinaPaySDKPaymentTypeWechatPay)\]
+[SinaPaySDK
+registerActivePlatforms:@[@(SinaPaySDKPaymentTypeAlipay),@(SinaPaySDKPaymentTypeWechatPay)\]
 onConfiguration:^(SinaPaySDKPaymentTypeCode platformType,
-NSMutableDictionary \*appInfo) {
+NSMutableDictionary *appInfo) {
 
 switch (platformType){
 
 case SinaPaySDKPaymentTypeAlipay:{
 
-\[appInfo SinaPaySDKSetupAliPayByAppId:@"" appScheme:@"alisdkdemo"\];
+[appInfo SinaPaySDKSetupAliPayByAppId:@"" appScheme:@"alisdkdemo"];
 
 }break;
 
 case SinaPaySDKPaymentTypeWechatPay:{
 
-\[appInfo SinaPaySDKSetupWeChatByAppId:@"wxfe0fd15b9c796981"
-appDesc:@"SinaPay Demo 2.0"\];
+[appInfo SinaPaySDKSetupWeChatByAppId:@"wxfe0fd15b9c796981"
+appDesc:@"SinaPay Demo 2.0"];
 
 }break;
 
 }
 
-}\];
+}];
 ```
 
 其中：需微信开放平台注册的appid字段，阿里支付需URL Schemes字段scheme。
@@ -298,29 +298,29 @@ appDesc:@"SinaPay Demo 2.0"\];
 相关代码如下：
 
 ```
-SinaPayOrder \*orderModel = \[SinaPayOrder getModel\];
+SinaPayOrder *orderModel = [SinaPayOrder getModel];
 
 orderModel.corpType = @"11";
 
 orderModel.businessId = @"14561929961102029";
 
-orderModel.orderNum = \[@"201606161653"
-stringByAppendingString:\[NSString
-stringWithFormat:@"%d",arc4random()\]\];
+orderModel.orderNum = [@"201606161653"
+stringByAppendingString:[NSString
+stringWithFormat:@"%d",arc4random()]];
 
 orderModel.appName = @"超级玛丽";
 
-orderModel.orderAmt = \[NSNumber numberWithFloat:0.01\];
+orderModel.orderAmt = [NSNumber numberWithFloat:0.01];
 
 orderModel.key=@"03d3180858f08b4ae6a09460f4dfd0cf";
 
-<orderModel.paymentTag=@2>;
+orderModel.paymentTag=@2;
 
-\[SinaPaySDK payActionWithType:SinaPaySDKPaymentTypeAlipay
+[SinaPaySDK payActionWithType:SinaPaySDKPaymentTypeAlipay
 withOrder:orderModel callback:^(SinaPaySDKPaymentTypeCode
 platformType,id response) {
 
-}\];
+}];
 ```
 
 1.  附录
