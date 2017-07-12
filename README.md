@@ -125,7 +125,7 @@ IOS版本开发包导入
 1.  编辑Podfile如：
 
 ```
-pod 'SinaPaySDK',:path=&gt;'../SinaPaySDKSpec/'。
+pod 'SinaPaySDK',:path=>git;'../SinaPaySDKSpec/'。
 ```
 （SinaPaySDKSpec与项目目录平级可如此引用，注意路径，可自行调整）
 >
@@ -136,7 +136,7 @@ pod 'SinaPaySDK',:path=&gt;'../SinaPaySDKSpec/'。
 1、编辑Podfile文件：
 
 ```
-pod 'SinaPaySDK',:git=&gt;'https://github.com/zhugeafanti/SinaPaySDK.git'
+pod 'SinaPaySDK',:git=>git;'https://github.com/zhugeafanti/SinaPaySDK.git'
 ```
 
 >![pic3.png](http://upload-images.jianshu.io/upload_images/2693519-8bc2423caadd8c23.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -153,15 +153,7 @@ IOS平台上的支付中心支付SDK接口如下表：
 | **方法原型** | + (void)registerActivePlatforms:(NSArray\*)arr onConfiguration:(SinaPaySDKConfigurationHandler)configurationHandler; |
 |--------------|----------------------------------------------------------------------------------------------------------------------|
 | **方法功能** | 新浪支付SDK注册                                                                                                      |
-| 方法参数     | /\*\*                                                                                                                
-                                                                                                                                      
-                新浪支付SDK注册接口                                                                                                   
-                                                                                                                                      
-                @param arr 使用的支付平台集合，如:@\[@(SinaPaySDKPaymentTypeAlipay),@(SinaPaySDKPaymentTypeWechatPay)\]               
-                                                                                                                                      
-                @param configurationHandler 配置回调处理，在此方法中根据设置的platformType来填充应用配置信息                          
-                                                                                                                                      
-                \*/                                                                                                                   |
+| **方法参数** | /\*\*                                                                                                                                                                                                                               <br>新浪支付SDK注册接口<br> @param arr 使用的支付平台集合，如:@\[@(SinaPaySDKPaymentTypeAlipay),@(SinaPaySDKPaymentTypeWechatPay)\] <br/><br/>@param configurationHandler 配置回调处理，在此方法中根据设置的platformType来填充应用配置信息 <br>\*/                                                                                                                   |
 | **返回值**   | 无                                                                                                                   |
 
 | **接口名称**   | **接口描述**            |
@@ -169,23 +161,9 @@ IOS平台上的支付中心支付SDK接口如下表：
 | handleOpenURL: | 新浪支付URL统一处理接口 |
 
 | **方法原型** | +(BOOL)handleOpenURL:(NSURL\*)url                                    |
-|--------------|----------------------------------------------------------------------|
+|------------|----------------------------------------------------------------------|
 | **方法功能** | URL统一处理接口                                                      |
-| 方法参数     | /\*\*                                                                
-                                                                                      
-                URL统一处理接口，iOS app中AppDelegate ：                              
-                                                                                      
-                - (BOOL)application:openURL:sourceApplication:annotation:             
-                                                                                      
-                - (BOOL)application: openURL: options: // NOTE: 9.0以后使用新API接口  
-                                                                                      
-                中调用。                                                              
-                                                                                      
-                @param url NSURL类型对象                                              
-                                                                                      
-                @return 返回bool类型YES or NO                                         
-                                                                                      
-                \*/                                                                   |
+| **方法参数** | /\*\* <br>URL统一处理接口，iOS app中AppDelegate ：<br>                - (BOOL)application:openURL:sourceApplication:annotation:   <br> - (BOOL)application: openURL: options: // NOTE: 9.0以后使用新API接口中调用。<br><br>@param url NSURL类型对象<br><br> @return 返回bool类型YES or NO <br>\*/                                                                                                                                         |
 | **返回值**   | BOOL类型                                                             |
 
 | **接口名称**                            | **接口描述**             |
@@ -195,43 +173,7 @@ IOS平台上的支付中心支付SDK接口如下表：
 | **方法原型** | +(void)payActionWithType :(SinaPaySDKPaymentTypeCode)payType withOrder:(SinaPayOrder \*)sinaPayOrder callback:(SinaPaySDKImportHandler)importHandler; |
 |--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **方法功能** | 提供给商户发起支付行为功能                                                                                                                            |
-| **方法参数** | /\*\*                                                                                                                                                 
-                                                                                                                                                                       
-                新浪支付 发起支付行为接口                                                                                                                              
-                                                                                                                                                                       
-                @param payType 支付类型                                                                                                                                
-                                                                                                                                                                       
-                @param sinaPayOrder 新浪支付 订单消息结构                                                                                                              
-                                                                                                                                                                       
-                @param importHandler 支付结果回调处理block                                                                                                             
-                                                                                                                                                                       
-                \*/                                                                                                                                                    
-                                                                                                                                                                       
-                注：                                                                                                                                                   
-                                                                                                                                                                       
-                1、payType参数为SinaPaySDKPaymentTypeCode枚举类型，参见SinaPaySDK.h。                                                                                  
-                                                                                                                                                                       
-                2、sinaPayOrder参数为SinaPayOrder类实例，初始化示例如下:                                                                                               
-                                                                                                                                                                       
-                SinaPayOrder \*orderModel = \[SinaPayOrder getModel\];                                                                                                 
-                                                                                                                                                                       
-                orderModel.corpType = @"11";                                                                                                                           
-                                                                                                                                                                       
-                orderModel.businessId = @"14561929961102029";                                                                                                          
-                                                                                                                                                                       
-                orderModel.orderNum = \[@"201606161653" stringByAppendingString:\[NSString stringWithFormat:@"%d",arc4random()\]\];                                    
-                                                                                                                                                                       
-                orderModel.appName = @"超级玛丽";                                                                                                                      
-                                                                                                                                                                       
-                orderModel.orderAmt = \[NSNumber numberWithFloat:0.01\];                                                                                               
-                                                                                                                                                                       
-                orderModel.sign = @"";                                                                                                                                 
-                                                                                                                                                                       
-                orderModel.paymentTag=@2;                                                                                                                              
-                                                                                                                                                                       
-                3、importHandler参数为block类型，支付回调处理。                                                                                                        
-                                                                                                                                                                       
-                请参考2.4请求参数说明，查看各个字段的含义和规格。                                                                                                      |
+| **方法参数** | /\*\*<br>新浪支付 发起支付行为接口<br><br>@param payType 支付类型<br><br>@param sinaPayOrder 新浪支付 订单消息结构<br><br> @param sinaPayOrder 新浪支付 订单消息结构<br><br> @param importHandler 支付结果回调处理block <br>\*/<br> 注：<br>1、payType参数为SinaPaySDKPaymentTypeCode枚举类型，参见SinaPaySDK.h。<br> 2、sinaPayOrder参数为SinaPayOrder类实例，初始化示例如下: <br><font color=red> SinaPayOrder \*orderModel = \[SinaPayOrder getModel\];  <br>orderModel.corpType = @"11";     <br>orderModel.businessId = @"14561929961102029";                  <br>orderModel.orderNum = \[@"201606161653" stringByAppendingString:\[NSString stringWithFormat:@"%d",arc4random()\]\];  <br>orderModel.appName = @"超级玛丽"; <br>orderModel.orderAmt = \[NSNumber numberWithFloat:0.01\];  <br>orderModel.paymentTag=@2;</font> <br>3、importHandler参数为block类型，支付回调处理。 <br>请参考2.4请求参数说明，查看各个字段的含义和规格。                                                                                                         |
 | **返回值**   | 无                                                                                                                                                    |
 
 请求参数说明
