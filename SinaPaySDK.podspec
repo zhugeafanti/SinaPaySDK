@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SinaPaySDK"
-  s.version      = "2.0.1"
+  s.version      = "2.0.2"
   s.summary      = "all kinds of used sina pay sdk for iOS develop"
 
   # This description is used to generate tags and improve search results.
